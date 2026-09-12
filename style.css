@@ -1,0 +1,1012 @@
+/* =========================================================
+   ОСНОВНЫЕ НАСТРОЙКИ
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8f7fb;
+    color: #25212d;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   ОБЩИЕ КОНТЕЙНЕРЫ
+   ========================================================= */
+
+.section-container,
+.header-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   ШАПКА
+   ========================================================= */
+
+.header {
+    background: white;
+    border-bottom: 1px solid #e7e1ef;
+    padding: 45px 0;
+}
+
+.header-container {
+    display: grid;
+
+    /*
+       1 колонка — фото
+       2 колонка — контакты
+       3 колонка — ФИО и должность
+    */
+
+    grid-template-columns: 180px 1fr 1.5fr;
+
+    gap: 45px;
+
+    align-items: center;
+}
+
+
+/* ФОТО */
+
+.profile-photo {
+    width: 160px;
+    height: 160px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid #eee8f8;
+
+    box-shadow: 0 8px 25px rgba(90, 50, 130, 0.12);
+}
+
+
+/* КОНТАКТЫ */
+
+.contacts h3 {
+    margin-bottom: 15px;
+    color: #6b3fa0;
+}
+
+.contacts p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.contacts a {
+    color: #503078;
+    text-decoration: none;
+}
+
+.contacts a:hover {
+    text-decoration: underline;
+}
+
+
+/* ИНФОРМАЦИЯ О ЧЕЛОВЕКЕ */
+
+.label,
+.section-label {
+    color: #7b4db3;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.person-info h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+
+.person-info h2 {
+    color: #6b3fa0;
+    font-size: 23px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.salary {
+    color: #555;
+}
+
+.salary strong {
+    color: #292230;
+}
+
+
+
+/* =========================================================
+   БЛОК "ОБО МНЕ"
+   ========================================================= */
+
+.about-section {
+    padding: 80px 0;
+    background: #f8f7fb;
+}
+
+.about-section .section-container {
+    display: grid;
+
+    /* Две равные колонки */
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 80px;
+}
+
+.about h2,
+.skills h2,
+.portfolio-section h2,
+.certificates-section h2,
+.footer h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.about p {
+    color: #5c5664;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   НАВЫКИ
+   ========================================================= */
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.skill {
+    font-weight: bold;
+}
+
+.skill-line {
+    height: 7px;
+    background: #e5ddec;
+    border-radius: 10px;
+    margin-top: 7px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    border-radius: 10px;
+
+    /*
+       Здесь можно менять уровень навыка.
+
+       Например:
+       width: 90%;
+       width: 70%;
+       width: 50%;
+    */
+
+    background: linear-gradient(90deg,
+            #7950a8,
+            #b68bdd);
+}
+
+
+/* Уровень каждого навыка */
+
+.skill-progress.sql {
+    width: 70%;
+}
+
+.skill-progress.html {
+    width: 30%;
+}
+
+.skill-progress.css {
+    width: 30%;
+}
+
+.skill-progress.js {
+    width: 20%;
+}
+
+.skill-progress.postgres {
+    width: 50%;
+}
+
+.skill-progress.powerbi {
+    width: 30%;
+}
+
+.skill-progress.excel {
+    width: 80%;
+}
+
+
+
+/* =========================================================
+   ПОРТФОЛИО
+   ========================================================= */
+
+.portfolio-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.section-description {
+    color: #77717e;
+    margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   ОБЩИЙ КАРУСЕЛЬ / "ПАРОВОЗИК"
+   ========================================================= */
+
+.carousel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Окно, через которое смотрим на карточки */
+
+.carousel-window {
+    overflow: hidden;
+    width: 100%;
+}
+
+
+/* Лента карточек */
+
+.carousel-track {
+    display: flex;
+    gap: 25px;
+
+    transition: transform 0.4s ease;
+}
+
+
+/* Кнопки */
+
+.carousel-button {
+    flex-shrink: 0;
+
+    width: 45px;
+    height: 45px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #eee6f7;
+
+    color: #63378e;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.carousel-button:hover {
+    background: #d9c8eb;
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   КАРТОЧКИ ПРОЕКТОВ
+   ========================================================= */
+
+.portfolio-card {
+    min-width: 350px;
+
+    background: #faf9fc;
+
+    border: 1px solid #e5deed;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(50, 30, 70, 0.07);
+}
+
+
+.portfolio-image {
+    width: 100%;
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+
+    cursor: pointer;
+}
+
+
+.portfolio-content {
+    padding: 25px;
+}
+
+.portfolio-content h3 {
+    margin-bottom: 10px;
+}
+
+.portfolio-content p {
+    color: #68626e;
+    margin-bottom: 15px;
+}
+
+.project-link {
+    color: #713da2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+
+
+/* =========================================================
+   СЕРТИФИКАТЫ
+   ========================================================= */
+
+.certificates-section {
+    padding: 80px 0;
+
+    background: #f8f7fb;
+}
+
+
+.certificate-card {
+    min-width: 300px;
+
+    background: white;
+
+    border: 1px solid #e5deed;
+
+    border-radius: 16px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(50, 30, 70, 0.07);
+}
+
+
+.certificate-image {
+    width: 100%;
+    height: 230px;
+
+    object-fit: contain;
+
+    cursor: pointer;
+
+    background: #f5f2f8;
+
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+}
+
+
+.certificate-card h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+
+.certificate-card p {
+    color: #77717e;
+    font-size: 14px;
+}
+
+
+
+/* =========================================================
+   ПОЛНОЭКРАННЫЙ ПРОСМОТР
+   ========================================================= */
+
+.lightbox {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(20, 15, 25, 0.95);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+
+/* Когда галерея открыта */
+
+.lightbox.active {
+    display: flex;
+}
+
+
+#lightbox-image {
+    max-width: 80%;
+    max-height: 85%;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Кнопка закрытия */
+
+.lightbox-close {
+    position: absolute;
+
+    top: 20px;
+    right: 30px;
+
+    border: none;
+    background: none;
+
+    color: white;
+
+    font-size: 45px;
+
+    cursor: pointer;
+}
+
+
+/* Стрелки */
+
+.lightbox-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+    width: 55px;
+    height: 70px;
+
+    font-size: 45px;
+
+    cursor: pointer;
+
+    border-radius: 10px;
+}
+
+.lightbox-arrow:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+.lightbox-prev {
+    left: 25px;
+}
+
+.lightbox-next {
+    right: 25px;
+}
+
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    background: #2b2035;
+
+    color: white;
+
+    padding: 70px 0 25px;
+}
+
+
+.footer .section-label {
+    color: #c8a9e4;
+}
+
+
+.footer h2 {
+    max-width: 550px;
+}
+
+
+.footer-content {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 70px;
+
+    align-items: start;
+}
+
+
+.footer-content>div>p:not(.section-label) {
+    color: #d5cbdc;
+    max-width: 500px;
+}
+
+
+
+/* =========================================================
+   ФОРМА
+   ========================================================= */
+
+.contact-form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 1px solid #574560;
+
+    border-radius: 8px;
+
+    background: #392c45;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #b48bd3;
+}
+
+
+.contact-form button {
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #9a67c5;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.contact-form button:hover {
+    background: #b17bdc;
+}
+
+
+/* =========================================================
+   НИЖНЯЯ ЧАСТЬ FOOTER
+   ========================================================= */
+
+.footer-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    border-top: 1px solid #4b3b55;
+
+    margin-top: 50px;
+
+    padding-top: 20px;
+
+    color: #b9aebe;
+
+    font-size: 13px;
+}
+
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .header-container {
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
+        gap: 25px;
+    }
+
+    .photo-block {
+        display: flex;
+        justify-content: center;
+    }
+
+    .person-info h1 {
+        font-size: 34px;
+    }
+
+
+    .about-section .section-container {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+
+    .footer-content {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+
+    .portfolio-card {
+        min-width: 280px;
+    }
+
+
+    .certificate-card {
+        min-width: 260px;
+    }
+
+
+    #lightbox-image {
+        max-width: 90%;
+        max-height: 75%;
+    }
+
+}
+
+/* ========================================
+   ОКНО «СООБЩЕНИЕ ПРИНЯТО»
+   ======================================== */
+
+.success-modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(30, 20, 50, 0.45);
+
+    backdrop-filter: blur(6px);
+
+    z-index: 9999;
+
+    animation: modalFadeIn 0.25s ease;
+}
+
+
+.success-modal-content {
+    position: relative;
+
+    width: min(420px, 90%);
+
+    padding: 40px 35px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(80, 50, 120, 0.25);
+
+    border: 1px solid rgba(120, 80, 180, 0.15);
+
+    animation: modalScaleIn 0.3s ease;
+}
+
+
+/* Галочка */
+.success-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0e9ff;
+
+    color: #7046b8;
+
+    font-size: 32px;
+    font-weight: bold;
+}
+
+
+/* Заголовок */
+.success-modal-content h2 {
+    margin: 0 0 10px;
+
+    color: #302044;
+
+    font-size: 26px;
+}
+
+
+/* Имя */
+.success-modal-content p {
+    margin: 8px 0;
+
+    color: #4c3c5f;
+
+    font-size: 17px;
+}
+
+
+/* Основной текст */
+.success-modal-content .success-text {
+    margin: 15px auto 25px;
+
+    max-width: 320px;
+
+    color: #777080;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* Кнопка */
+.success-button {
+    padding: 12px 30px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #7046b8;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.success-button:hover {
+    background: #5d389d;
+
+    transform: translateY(-2px);
+}
+
+
+/* Крестик */
+.success-close {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #8d8299;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+
+.success-close:hover {
+    color: #7046b8;
+}
+
+
+/* Анимация появления */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes modalScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ========================================
+   ИНДИКАТОР ОТПРАВКИ ФОРМЫ
+   ======================================== */
+
+.form-loader {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    backdrop-filter: blur(2px);
+
+    z-index: 9998;
+
+    animation: loaderFadeIn 0.25s ease;
+}
+
+
+/* Большая буква P */
+.loader-letter {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 110px;
+    font-weight: 600;
+
+    color: rgba(112, 70, 184, 0.22);
+
+    text-shadow:
+        0 0 25px rgba(112, 70, 184, 0.12);
+
+    animation: loaderSpin 1.8s linear infinite;
+}
+
+
+/* Плавное вращение */
+@keyframes loaderSpin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Плавное появление */
+@keyframes loaderFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/*зум-иконка на карточках портфолио*/
+.portfolio-image-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.portfolio-image-wrapper .portfolio-image {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+.zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translate(-50%, -50%) scale(0.7);
+
+    opacity: 0;
+
+    border-radius: 50%;
+
+    background: rgba(110, 60, 190, 0.35);
+
+    box-shadow:
+        0 0 20px rgba(150, 80, 255, 0.35);
+
+    backdrop-filter: blur(3px);
+
+    transition: 0.25s ease;
+
+    pointer-events: none;
+}
+
+.zoom-icon svg {
+    width: 28px;
+    height: 28px;
+
+    fill: none;
+    stroke: white;
+    stroke-width: 2.8;
+    stroke-linecap: round;
+
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.45));
+}
+
+.portfolio-image-wrapper:hover .zoom-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
