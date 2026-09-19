@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Аналитический Кокпит: Марафон 66</title>
+    <link rel="stylesheet" href="style.css">
+        <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=112445713', 'ym');
+
+        ym(112445713, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/112445713" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f5f7fb; color: #2d3748; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 600px; width: 100%; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1, .sub, .score { text-align: center; }
+        h1 { font-size: 24px; color: #1a202c; margin-bottom: 5px; }
+        .sub { color: #718096; margin-bottom: 25px; font-size: 14px; }
+        .cat { display: inline-block; padding: 4px 8px; background: #ebf8ff; color: #2b6cb0; border-radius: 4px; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
+        .q-text { font-size: 18px; font-weight: 700; margin-bottom: 20px; line-height: 1.4; }
+        .btn { display: block; width: 100%; text-align: left; padding: 14px 18px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; cursor: pointer; font-size: 15px; transition: 0.2s; }
+        .btn:hover { background: #edf2f7; }
+        .correct { background: #c6f6d5 !important; border-color: #38a169; color: #22543d; font-weight: bold; }
+        .incorrect { background: #fed7d7 !important; border-color: #e53e3e; color: #742a2a; }
+        .hint { margin-top: 15px; padding: 12px; background: #f7fafc; border-left: 4px solid #4a5568; color: #4a5568; font-size: 14px; display: none; }
+        .next-btn { display: none; margin: 20px auto 0 auto; padding: 12px 30px; background: #3182ce; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .menu-btn { background: #3182ce; color: white; font-weight: bold; text-align: center; margin-top: 15px; }
+        .menu-btn:hover { background: #2b6cb0; }
+        .score { font-size: 15px; color: #4a5568; margin-top: 25px; border-top: 1px solid #edf2f7; padding-top: 15px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📊 Аналитический Кокпит</h1>
+    <div class="sub">Ежедневный универсальный тренажер (66 вопросов по всем 33 метрикам)</div>
+    <div id="box"></div>
+    <div class="score" id="score-text" style="display:none;"></div>
+
+                    <!-- Кнопка возврата на главную -->
+                <a href="index.html" target="_blank" class="btn-analytics-test" style="display: flex; justify-content: center; width: 100%; text-decoration: none;">
+                   💃 Вернуться на главную страницу резюме
+                    
+                </a>
+</div>
+<script>
+const raw = [
+    {m:"Среднее арифметическое", s:"Сумма всех значений выборки, деленная на их общее количество (∑x_i / n)", e:"=СРЗНАЧ(диапазон)"},
+    {m:"Медиана", s:"Значение, расположенное строго по центру упорядоченного по возрастанию числового ряда", e:"=МЕДИАНА(диапазон)"},
+    {m:"Мода", s:"Значение в массиве данных, встречающееся с наибольшей частотой", e:"=МОДА.ОДН(диапазон)"},
+    {m:"Дисперсия", s:"Средний квадрат отклонений индивидуальных значений ряда от их среднего арифметического", e:"=ДИСП.Г(диапазон)"},
+    {m:"Стандартное отклонение", s:"Квадратный корень из дисперсии (√Дисперсия), отражающий разброс данных", e:"=СТАНДОТКЛ.Г(диапазон)"},
+    {m:"Размах", s:"Разность между максимальным и минимальным значениями в выборке (Xmax - Xmin)", e:"=МАКС(диапазон)-МИН(диапазон)"},
+    {m:"CR (Conversion Rate)", s:"Процент посетителей, совершивших целевое действие (Целевые действия / Посетители * 100%)", e:"Считается как отношение объема уникальных целевых сессий к общему объему трафика"},
+    {m:"AOV (Average Order Value)", s:"Средняя стоимость одного заказа, рассчитываемая как Выручка / Количество заказов", e:"Вычисляется математическим делением общей суммы продаж за период на число выданных чеков"},
+    {m:"UPT (Units Per Transaction)", s:"Среднее количество единиц товара в одном чеке (Количество проданных товаров / Количество чеков)", e:"Используется для оценки средней глубины и объема товарной корзины покупателя"},
+    {m:"Cart Abandonment Rate", s:"Доля пользователей, добавивших товар в корзину, но не завершивших покупку ((1 - Покупки / Корзины) * 100%)", e:"Позволяет выявить технические или интерфейсные барьеры на этапе оформления заказа"},
+    {m:"Bounce Rate (Показатель отказов)", s:"Процент визитов, в рамках которых пользователь просмотрел не более одной страницы или ушел быстрее 15 сек", e:"Фиксируется счетчиками веб-аналитики автоматически на основе поведенческих логов пользователя"},
+    {m:"CPM (Cost Per Mille)", s:"Стоимость одной тысячи показов рекламного объявления ((Затраты на рекламу / Показы) * 1000)", e:"Классическая медийная модель закупки трафика, ориентированная на максимизацию охвата"},
+    {m:"CPC (Cost Per Click)", s:"Средняя стоимость одного клика пользователя по объявлению (Расходы на рекламу / Клики)", e:"Основная стоимостная метрика контекстной и таргетированной рекламы с оплатой за переходы"},
+    {m:"CPL (Cost Per Lead)", s:"Стоимость привлечения одного лида — полученной контактной формы или заявки (Расходы / Лиды)", e:"Определяет экономическую эффективность маркетинговых кампаний на этапе сбора базы клиентов"},
+    {m:"CPA (Cost Per Action)", s:"Стоимость совершения пользователем заданного целевого действия (Расходы / Количество действий)", e:"Охватывает широкий спектр учитываемых микроконверсий: клики, скачивания, отправки форм"},
+    {m:"ДРР (Доля Рекламных Расходов)", s:"Отношение бюджета рекламной кампании к полученному от нее валовому доходу ((Расходы / Доход) * 100%)", e:"Ключевой стоимостной показатель в e-commerce, позволяющий контролировать рентабельность бюджетов"},
+    {m:"CPO (Cost Per Order)", s:"Стоимость привлечения одного подтвержденного или оплаченного заказа (Затраты на рекламу / Количество заказов)", e:"Вычисляется делением итогового рекламного бюджета на реальное число совершенных сделок"},
+    {m:"CAC (Customer Acquisition Cost)", s:"Полная стоимость привлечения одного уникального нового платящего клиента с учетом всех сопутствующих издержек", e:"Включает в себя прямые рекламные расходы, заработную плату команды, стоимость софта и инфраструктуры"},
+    {m:"ROAS (Return on Ad Spend)", s:"Коэффициент окупаемости затрат на рекламу, рассчитываемый как Доход от рекламы / Расходы на рекламу", e:"Демонстрирует финансовую отдачу: объем выручки, полученный на каждый вложенный в рекламу рубль"},
+    {m:"ROMI (Return on Marketing Investment)", s:"Рентабельность инвестиций в маркетинг с учетом прибыли ((Прибыль от маркетинга - Бюджет) / Бюджет * 100%)", e:"Позволяет оценить чистую финансовую эффективность маркетинговой деятельности бизнеса"},
+    {m:"CTR (Click-Through Rate)", s:"Коэффициент кликабельности рекламного материала, вычисляемый как (Клики / Показы) * 100%", e:"Служит индикатором релевантности, привлекательности и качества креатива для целевой аудитории"},
+    {m:"LVR (Lead Velocity Rate)", s:"Скорость роста лидов, отражающая процентное изменение объема генерации лидов месяц к месяцу", e:"Применяется для прогнозирования будущих темпов масштабирования продаж компании"},
+    {m:"Share of Voice (SOV)", s:"Доля голоса. Процент рекламной активности или упоминаний бренда в общем объеме рынка анализируемой ниши", e:"Отражает уровень присутствия и медийного влияния бренда в информационном пространстве"},
+    {m:"Retention Rate (Коэффициент удержания)", s:"Доля клиентов, остающихся активными в течение заданного периода времени ((Клиенты на конец - Новые) / Клиенты на начало * 100%)", e:"Главный показатель соответствия продукта рынку и долгосрочной жизнеспособности бизнеса"},
+    {m:"Churn Rate (Коэффициент оттока)", s:"Процент клиентов из существующей базы, которых компания теряет за определенный интервал времени", e:"Математически рассчитывается как разность между 100% и текущим показателем удержания (Retention Rate)"},
+    {m:"NPS (Net Promoter Score)", s:"Индекс чистой лояльности клиентов на основе анкетирования (% Промоутеров [9-10] - % Критиков [0-6])", e:"Позволяет оценить долгосрочную лояльность аудитории и вероятность органических рекомендаций"},
+    {m:"LTV / CLV (Lifetime Value)", s:"Пожизненная ценность клиента. Совокупный объем прибыли, получаемый от одного клиента за весь цикл взаимодействия", e:"Прогнозируется с помощью умножения Среднего чека на Частоту покупок и среднее Время жизни клиента"},
+    {m:"ARPU (Average Revenue Per User)", s:"Средняя выручка, приходящаяся на одного активного пользователя за период (Выручка / Все пользователи)", e:"Определяет делением совокупного дохода на общее количество уникальных посетителей системы"},
+    {m:"ARPPU (Avg Revenue Per Paying User)", s:"Средняя выручка, приходящаяся строго на одного платящего клиента за выбранный период времени", e:"Исключает из расчетов неплатящую часть аудитории, демонстрируя экономический потенциал монетизации"},
+    {m:"Gross Profit (Валовая прибыль)", s:"Финансовый результат, рассчитываемый как совокупная Выручка (Revenue) за вычетом Себестоимости (COGS)", e:"Отражает базовую экономическую эффективность производства или закупки до учета операционных расходов"},
+    {m:"Margin (Маржинальность)", s:"Доля прибыли в конечной отпускной стоимости реализуемого товара или услуги ((Прибыль / Выручка) * 100%)", e:"Служит ключевым индикатором эффективности ценообразования; математически не может превышать 100%"},
+    {m:"ROI (Return on Investment)", s:"Общий коэффициент окупаемости любых инвестиций бизнеса ((Чистая прибыль / Сумма инвестиций) * 100%)", e:"Универсальный финансовый показатель рентабельности капитала, вложенного в любые активы или проекты"},
+    {m:"EBITDA", s:"Объем прибыли организации до вычета начисленных процентов, налогов, износа и амортизационных отчислений", e:"Рассчитывается в рамках финансового учета для оценки операционной эффективности основного бизнеса"},
+    {m:"OR (Open Rate)", s:"Процент открытых писем рассылки от общего объема успешно доставленных электронных сообщений", e:"Служит ключевым индикатором качества темы письма, узнаваемости отправителя и времени доставки"},
+    {m:"CTOR (Click-to-Open Rate)", s:"Процент кликов по ссылкам внутри письма, рассчитанный строго среди тех пользователей, кто открыл сообщение", e:"Отражает качество, вовлеченность и релевантность внутреннего текстового и визуального контента"},
+    {m:"UR (Unsubscribe Rate)", s:"Процент пользователей, оформивших отписку от рассылки после получения конкретного сообщения", e:"Информирует о чрезмерной частоте отправлений писем или о нерелевантности контента для базы"},
+    {m:"ER (Engagement Rate)", s:"Коэффициент вовлеченности пользователей в контент ((Сумма реакций [лайки, комменты, репосты] / Охват или Подписчики) * 100%)", e:"Позволяет оценить степень отклика и интереса целевой аудитории к публикуемым материалам"},
+    {m:"CSAT (Customer Satisfaction Score)", s:"Индекс удовлетворенности клиентов качеством взаимодействия на основе опросов после транзакции или диалога", e:"Вычисляется как процентное отношение положительных оценок к общему количеству собранных отзывов"},
+    {m:"FCR (First Contact Resolution)", s:"Доля обращений в службу поддержки, которые были полностью закрыты и решены в рамках первого контакта", e:"Определяет операционную скорость, качество и профессионализм работы сотрудников клиентского сервиса"},
+    {m:"CES (Customer Effort Score)", s:"Индекс усилий клиента, отражающий степень субъективной сложности решения возникшей проблемы пользователя", e:"Вычисляется как среднее арифметическое на основе оценок клиентов по стандартизированной шкале сложности"},
+    {m:"Uptime", s:"Процент времени непрерывной и корректной работы серверной или программной инфраструктуры сайта без сбоев", e:"Контролируется с помощью автоматизированных внешних систем мониторинга доступности хостинга"},
+    {m:"LCP (Largest Contentful Paint)", s:"Техническая метрика скорости, фиксирующая время рендеринга самого крупного видимого контентного элемента", e:"Входит в базовый стандарт Core Web Vitals; критически важна для ранжирования страниц в поисковых системах"},
+    {m:"CLS (Cumulative Layout Shift)", s:"Индекс накопительного сдвига макета страницы, измеряющий визуальную стабильность элементов интерфейса", e:"Показывает отсутствие непредсказуемых смещений блоков и кнопок в процессе загрузки ресурсов сайта"}
+];
+let qBank = [], cur = 0, score = 0, answered = false;
+const formulas = raw.map(i => i.s), excels = raw.map(i => i.e);
+function buildBank() {
+    let list = [];
+    raw.forEach(item => {
+        list.push({ cat: "Математическая суть метрики", q: `Какое математическое определение или расчетная формула соответствует показателю "${item.m}"?`, cText: item.s, fakes: formulas });
+        let isExcel = item.e.startsWith("=");
+        list.push({ cat: isExcel ? "Формулы в Excel" : "Аналитическая инфраструктура", q: isExcel ? `Какая функция используется в Excel для расчета показателя "${item.m}"?` : `Какова специфика расчета или фиксации показателя "${item.m}" в аналитике?`, cText: item.e, fakes: excels });
+    });
+    return list;
+}
+function getRandomFakes(arr, correct, count) {
+    let filtered = [...new Set(arr.filter(i => i !== correct))];
+    return filtered.sort(() => Math.random() - 0.5).slice(0, count);
+}
+function startMenu() {
+    document.getElementById("score-text").style.display = "none";
+    document.getElementById("box").innerHTML = `
+        <p style="text-align:center; font-size:16px;">Выберите формат обучения на сегодня:</p>
+        <button class="btn menu-btn" onclick="initQuiz(15)">⚡ Быстрый раунд (15 случайных вопросов)</button>
+        <button class="btn menu-btn" style="background:#2b6cb0" onclick="initQuiz(66)">🏆 Полный марафон (Все 66 вопросов)</button>
+    `;
+}
+function initQuiz(num) {
+    let fullList = buildBank();
+    fullList.sort(() => Math.random() - 0.5);
+    qBank = fullList.slice(0, num);
+    cur = 0; score = 0;
+    document.getElementById("score-text").style.display = "block";
+    show();
+}
+function show() {
+    answered = false;
+    let data = qBank[cur];
+    let opts = [data.cText, ...getRandomFakes(data.fakes, data.cText, 3)].sort(() => Math.random() - 0.5);
+    document.getElementById("box").innerHTML = `
+        <div class="cat">${data.cat}</div>
+        <div class="q-text">${data.q}</div>
+        <div id="opts"></div>
+        <div class="hint" id="h-box">💡 Правильный ответ выделен зеленым. Запомните логику перед переходом дальше!</div>
+        <button class="next-btn" id="n-btn" onclick="next()">Дальше →</button>
+    `;
+    let optBox = document.getElementById("opts");
+    opts.forEach(o => {
+        let b = document.createElement("button");
+        b.className = "btn"; b.innerText = o;
+        b.onclick = () => check(o === data.cText, b);
+        optBox.appendChild(b);
+    });
+    document.getElementById("score-text").innerText = `Вопрос ${cur + 1} из ${qBank.length} | Правильно: ${score}`;
+}
+function check(isCorrect, btn) {
+    if(answered) return; answered = true;
+    let btns = document.getElementById("opts").getElementsByTagName("button");
+    if(isCorrect) { btn.classList.add("correct"); score++; } 
+    else { btn.classList.add("incorrect"); for(let b of btns) { if(b.innerText === qBank[cur].cText) b.classList.add("correct"); } }
+    document.getElementById("h-box").style.display = "block";
+    document.getElementById("n-btn").style.display = "block";
+}
+function next() {
+    cur++;
+    if(cur < qBank.length) show();
+    else {
+        let pct = Math.round((score / qBank.length) * 100);
+        document.getElementById("score-text").style.display = "none";
+        document.getElementById("box").innerHTML = `
+            <h2 style="text-align:center; color:#2b6cb0;">Раунд завершен!</h2>
+            <p style="text-align:center; font-size:18px; font-weight:bold;">Результат: ${score} из ${qBank.length} очков (${pct}%)</p>
+            <button class="btn menu-btn" onclick="startMenu()">Вернуться на главную 🔄</button>
+        `;
+    }
+}
+startMenu();
+</script>
+</body>
+</html>

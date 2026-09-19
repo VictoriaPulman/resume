@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Z-тест — калькулятор A/B теста</title>
+
+        <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=112445713', 'ym');
+
+        ym(112445713, 'init', { ssr: true, webvisor: true, clickmap: true, ecommerce: "dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce: true, trackLinks: true });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/112445713" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header class="header">
+        <div class="logo">Z</div>
+
+        <div>
+            <h1>Подвести итоги теста</h1>
+            <p>Проверьте, какой из вариантов лучше и можно ли считать результаты значимыми.</p>
+
+        </div>
+                                        <!-- Кнопка возврата на главную -->
+                <a href="../index.html" target="_blank" class="btn-analytics-test" style="display: flex; justify-content: center; width: 100%; text-decoration: none;">
+                   💃 Вернуться на главную страницу резюме
+                    
+                </a>
+    </header>
+
+
+    <section class="settings-card">
+
+        <div class="setting">
+            <span class="setting-label">Количество вариантов</span>
+
+            <div class="counter">
+                <button id="removeVariant" class="counter-btn">−</button>
+                <span id="variantCount">2</span>
+                <button id="addVariant" class="counter-btn">+</button>
+            </div>
+        </div>
+
+
+        <div class="setting confidence-setting">
+
+            <div class="confidence-header">
+                <span class="setting-label">Достоверность</span>
+                <strong id="confidenceValue">95%</strong>
+            </div>
+
+            <input
+                type="range"
+                id="confidence"
+                min="80"
+                max="99"
+                value="95"
+                step="1"
+            >
+
+            <div class="range-labels">
+                <span>80%</span>
+                <span>99%</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="variants-card">
+
+        <div class="table-header">
+            <div>Вариант</div>
+            <div>Число конверсий</div>
+            <div>Размер выборки</div>
+            <div>Конверсия</div>
+            <div>Доверительный интервал</div>
+        </div>
+
+        <div id="variantsContainer"></div>
+
+    </section>
+
+
+    <section class="result-card">
+
+        <div class="result-title">
+            <span class="result-icon">✓</span>
+
+            <div>
+                <h2>Результат теста</h2>
+                <p id="resultDescription">
+                    Измените данные вариантов, чтобы увидеть результат.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="comparison" id="comparison">
+            <!-- Сравнение вариантов появится здесь -->
+        </div>
+
+
+        <div class="main-conclusion" id="mainConclusion">
+            Заполните данные теста
+        </div>
+
+    </section>
+
+
+    <footer>
+        Z-тест для сравнения конверсий
+    </footer>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
